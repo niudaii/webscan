@@ -92,6 +92,8 @@ location 分两种情况，body 和 header，分别代表返回包的 body 和 h
 
 - 修改增加删除了一些规则
 
+- 已经重构，新项目地址: https://github.com/niudaii/go-webinfo
+
 ### 参考链接
 
 https://github.com/ShiHuang-ESec/EHole
