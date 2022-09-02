@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/github/workflow/status/niudaii/webscan/Release?style=flat-square" alt="Github Actions">
   </a>
   <a href="https://goreportcard.com/report/github.com/niudaii/webscan">
-    <img src="https://goreportcard.com/badge/github.com/niudaii/webscan?style=flat-square">
+    <img src="https://goreportcard.com/badge/github.com/niudaii/webscan">
   </a>
   <a href="https://github.com/niudaii/webscan/releases">
     <img src="https://img.shields.io/github/release/niudaii/webscan/all.svg?style=flat-square">
