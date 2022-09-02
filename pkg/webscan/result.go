@@ -12,8 +12,8 @@ type Result struct {
 	Favicon       string
 	IconHash      string
 	Title         string
-	Fingers       []*FingerRule
 	Wappalyzer    map[string]struct{}
+	Fingers       []*FingerRule
 }
 
 // Results 按照contentLength排序

@@ -8,11 +8,11 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/license-MIT-_red.svg">
   </a>
-  <a href="https://goreportcard.com/report/github.com/niudaii/webscan">
-    <img src="https://goreportcard.com/badge/github.com/niudaii/webscan?style=flat-square">		
-  </a>
   <a href="https://github.com/niudaii/webscan/actions">
     <img src="https://img.shields.io/github/workflow/status/niudaii/webscan/Release?style=flat-square" alt="Github Actions">
+  </a>
+  <a href="https://goreportcard.com/report/github.com/niudaii/webscan">
+    <img src="https://goreportcard.com/badge/github.com/niudaii/webscan?style=flat-square">
   </a>
   <a href="https://github.com/niudaii/webscan/releases">
     <img src="https://img.shields.io/github/release/niudaii/webscan/all.svg?style=flat-square">
@@ -25,11 +25,11 @@
 
 ## 功能
 
-- 
+- 获取 statusCode、contentLength、favicon、iconHash、title、wappalyzer、finger
 - 支持彩色输出
 - 支持多种输出模式（debug|silent）
 - 全平台支持
-- API模式，可参考（internal/runner/runner.go）
+- API调用，可参考（internal/runner/runner.go）
 
 ## 使用
 
