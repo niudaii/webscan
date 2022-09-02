@@ -2,5 +2,5 @@
 .DS_Store
 dist/
 bin/
-cmd/crack/webscan
-cmd/crack/webscan.txt
+cmd/webscan/webscan
+cmd/webscan/webscan.txt
