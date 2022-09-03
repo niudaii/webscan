@@ -26,10 +26,12 @@
 ## 功能
 
 - 获取 statusCode、contentLength、favicon、iconHash、title、wappalyzer、finger
+- 多线程爆破
 - 支持彩色输出
 - 支持多种输出模式（debug|silent）
 - 全平台支持
-- API调用，可参考（internal/runner/runner.go）
+- API调用，可参考（[internal/runner/runner.go](https://github.com/niudaii/webscan/blob/main/internal/runner/runner.go)）
+- 和 nuclei 联动
 
 ## 使用
 
@@ -60,6 +62,43 @@ DEBUG:
    -silent  show only results in output
    -debug   show debug output
 ```
+
+## 截图
+
+![image-20220903114959607](https://nnotes.oss-cn-hangzhou.aliyuncs.com/notes/image-20220903114959607.png)
+
+## 说明
+
+### 指纹
+
+- demo
+
+```
+{
+    "name": "Shiro",
+    "pocTags": [
+        "shiro"
+    ],
+    "tags": [],
+    "desc": "RCE",
+    "fingers": [
+        {
+            "type": "or",
+            "rules": [
+                {
+                    "method": "keyword",
+                    "location": "header",
+                    "keyword": "=deleteMe"
+                }
+            ]
+        }
+    ],
+    "hasPoc": true
+}
+```
+
+- pocTags 和 nuclei 的 tags 对应
+- 不公开内部指纹
 
 
 

@@ -10,7 +10,6 @@ import (
 	"github.com/projectdiscovery/gologger/formatter"
 	"github.com/projectdiscovery/gologger/levels"
 	"strings"
-	"time"
 )
 
 type Options struct {
@@ -146,10 +145,8 @@ func (o *Options) configureOptions() error {
 
 	o.Targets = utils.RemoveDuplicate(o.Targets)
 
-	gologger.Info().Msgf("当前时间: %v", time.Now().Format("2006-01-02 15:04:05"))
 	opt, _ := json.Marshal(o)
 	gologger.Debug().Msgf("当前配置: %v", string(opt))
-	gologger.Info().Msgf("指纹数量: %v", len(o.FingerRules))
 
 	return nil
 }

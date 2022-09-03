@@ -29,6 +29,7 @@ func (r *Runner) Run() {
 		gologger.Info().Msgf("目标为空")
 		return
 	}
+	gologger.Info().Msgf("指纹数量: %v", len(r.options.FingerRules))
 	gologger.Info().Msgf("目标数量: %v", len(r.options.Targets))
 	results := r.engine.Run(r.options.Targets)
 	if len(results) == 0 {
