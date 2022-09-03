@@ -26,7 +26,8 @@
 ## 功能
 
 - 获取 statusCode、contentLength、favicon、iconHash、title、wappalyzer、finger
-- 多线程爆破
+- title自动解码
+- js分析自动跳转
 - 支持彩色输出
 - 支持多种输出模式（debug|silent）
 - 全平台支持
