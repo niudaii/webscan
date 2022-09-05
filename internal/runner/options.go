@@ -38,7 +38,7 @@ func ParseOptions() *Options {
 	options := &Options{}
 
 	flagSet := goflags.NewFlagSet()
-	flagSet.SetDescription(`Webscanner`)
+	flagSet.SetDescription(`Web Scanner`)
 
 	flagSet.CreateGroup("input", "Input",
 		flagSet.StringVarP(&options.Input, "input", "i", "", "url input(example: -i 'http://www.baidu.com', -i '192.168.243.11:81')"),
@@ -46,8 +46,8 @@ func ParseOptions() *Options {
 	)
 
 	flagSet.CreateGroup("config", "Config",
-		flagSet.IntVar(&options.Threads, "threads", 1, "number of threads"),
-		flagSet.IntVar(&options.Timeout, "timeout", 10, "timeout in seconds"),
+		flagSet.IntVar(&options.Threads, "threads", 10, "number of threads"),
+		flagSet.IntVar(&options.Timeout, "timeout", 15, "timeout in seconds"),
 		flagSet.StringVarP(&options.Proxy, "proxy", "p", "", "proxy(example: -p 'http://127.0.0.1:8080')"),
 		flagSet.StringVar(&options.Header, "header", "", "add custom headers(example: -header 'User-Agent: xxx, ')"),
 		flagSet.StringVar(&options.FingerFile, "finger-file", "", "use your finger file(example: -finger-file 'fingers.json')"),

@@ -7,8 +7,8 @@ import (
 	"github.com/twmb/murmur3"
 )
 
-func (e *Engine) GetHash(url string) (iconhash string) {
-	content, err := e.FromURLGetContent(url)
+func (r *Runner) GetHash(url string) (iconhash string) {
+	content, err := r.FromURLGetContent(url)
 	if err != nil {
 		return
 	}
@@ -18,8 +18,8 @@ func (e *Engine) GetHash(url string) (iconhash string) {
 	return
 }
 
-func (e *Engine) FromURLGetContent(url string) (content []byte, err error) {
-	resp, err := e.reqClient.R().Get(url)
+func (r *Runner) FromURLGetContent(url string) (content []byte, err error) {
+	resp, err := r.reqClient.R().Get(url)
 	if err != nil {
 		return
 	}

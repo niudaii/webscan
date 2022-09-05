@@ -8,18 +8,18 @@ import (
 )
 
 type Runner struct {
-	options *Options
-	engine  *webscan.Engine
+	options       *Options
+	webscanRunner *webscan.Runner
 }
 
 func NewRunner(options *Options) (*Runner, error) {
-	engine, err := webscan.NewEngine(options.Proxy, options.Threads, options.Timeout, options.Headers, options.NoColor, options.FingerRules)
+	webscanRunner, err := webscan.NewRunner(options.Proxy, options.Threads, options.Timeout, options.Headers, options.NoColor, options.FingerRules)
 	if err != nil {
 		return nil, fmt.Errorf("NewEngine err, %v", err)
 	}
 	runner := &Runner{
-		options: options,
-		engine:  engine,
+		options:       options,
+		webscanRunner: webscanRunner,
 	}
 	return runner, nil
 }
@@ -31,7 +31,7 @@ func (r *Runner) Run() {
 	}
 	gologger.Info().Msgf("指纹数量: %v", len(r.options.FingerRules))
 	gologger.Info().Msgf("目标数量: %v", len(r.options.Targets))
-	results := r.engine.Run(r.options.Targets)
+	results := r.webscanRunner.Run(r.options.Targets)
 	if len(results) == 0 {
 		gologger.Info().Msgf("结果为空")
 		return

@@ -30,7 +30,7 @@ func getCert(resp *req.Response) (cert string) {
 	return cert
 }
 
-func (e *Engine) getFinger(resp *req.Response) (results []*FingerRule) {
+func (r *Runner) getFinger(resp *req.Response) (results []*FingerRule) {
 	bodyString := resp.String()
 	headerString := getHeaderString(resp)
 	certString := getCert(resp)
@@ -41,7 +41,7 @@ func (e *Engine) getFinger(resp *req.Response) (results []*FingerRule) {
 	var flag2 bool
 	var flag3 int
 	// 多个 FingerRules
-	for _, fingerRule := range e.fingerRules {
+	for _, fingerRule := range r.fingerRules {
 		rules = ""
 		flag1 = false
 		// 单个 fingerRule 多个 finger
@@ -64,7 +64,7 @@ func (e *Engine) getFinger(resp *req.Response) (results []*FingerRule) {
 					if value, ok := iconMap[rule.Location]; ok {
 						toMatch = value
 					} else {
-						toMatch = e.GetHash(resp.Request.URL.Scheme + "://" + resp.Request.URL.Host + rule.Location)
+						toMatch = r.GetHash(resp.Request.URL.Scheme + "://" + resp.Request.URL.Host + rule.Location)
 						iconMap[rule.Location] = toMatch
 					}
 				}

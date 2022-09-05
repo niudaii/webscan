@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type Engine struct {
+type Runner struct {
 	reqClient        *req.Client
 	wappalyzerClient *wappalyzer.Wappalyze
 	threads          int
@@ -17,12 +17,12 @@ type Engine struct {
 	fingerRules      []*FingerRule
 }
 
-func NewEngine(proxy string, timeout, threads int, headers []string, noColor bool, fingerRules []*FingerRule) (*Engine, error) {
+func NewRunner(proxy string, timeout, threads int, headers []string, noColor bool, fingerRules []*FingerRule) (*Runner, error) {
 	wappalyzerClient, err := wappalyzer.New()
 	if err != nil {
 		return nil, err
 	}
-	return &Engine{
+	return &Runner{
 		reqClient:        NewReqClient(proxy, timeout, headers),
 		wappalyzerClient: wappalyzerClient,
 		threads:          threads,
@@ -56,7 +56,7 @@ func NewReqClient(proxy string, timeout int, headers []string) *req.Client {
 	return reqClient
 }
 
-func (e *Engine) Run(urls []string) (results Results) {
+func (e *Runner) Run(urls []string) (results Results) {
 	// RunTask
 	wg := &sync.WaitGroup{}
 	taskChan := make(chan string, e.threads)
@@ -92,9 +92,9 @@ func (e *Engine) Run(urls []string) (results Results) {
 	return
 }
 
-func (e *Engine) Webinfo(url string) (result *Result, err error) {
-	r := e.reqClient.R()
-	resp, err := FirstGet(r, url)
+func (r *Runner) Webinfo(url string) (result *Result, err error) {
+	request := r.reqClient.R()
+	resp, err := FirstGet(request, url)
 	if err != nil {
 		return
 	}
@@ -104,7 +104,7 @@ func (e *Engine) Webinfo(url string) (result *Result, err error) {
 		if jumpurl == "" {
 			break
 		}
-		resp, err = r.Get(jumpurl)
+		resp, err = request.Get(jumpurl)
 	}
 	if err != nil {
 		return
@@ -114,10 +114,10 @@ func (e *Engine) Webinfo(url string) (result *Result, err error) {
 		StatusCode:    resp.StatusCode,
 		ContentLength: len(resp.String()),
 		Title:         getTitle(resp),
-		Fingers:       e.getFinger(resp),
+		Fingers:       r.getFinger(resp),
 	}
-	result.Favicon, result.IconHash = e.getFavicon(resp)
-	result.Wappalyzer = e.wappalyzerClient.Fingerprint(resp.Header, resp.Bytes())
+	result.Favicon, result.IconHash = r.getFavicon(resp)
+	result.Wappalyzer = r.wappalyzerClient.Fingerprint(resp.Header, resp.Bytes())
 	return
 }
 

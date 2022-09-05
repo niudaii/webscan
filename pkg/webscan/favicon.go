@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (e *Engine) getFavicon(resp *req.Response) (favicon string, iconHash string) {
+func (r *Runner) getFavicon(resp *req.Response) (favicon string, iconHash string) {
 	htmlDoc, err := html.Parse(bytes.NewReader(resp.Bytes()))
 	if err != nil {
 		return favicon, iconHash
@@ -35,7 +35,7 @@ func (e *Engine) getFavicon(resp *req.Response) (favicon string, iconHash string
 		}
 		favicon = resp.Request.URL.Scheme + "://" + resp.Request.URL.Host + favicon
 	}
-	iconHash = e.GetHash(favicon)
+	iconHash = r.GetHash(favicon)
 	if iconHash == "" {
 		favicon = ""
 	}

@@ -32,7 +32,7 @@
 - 支持多种输出模式（debug|silent）
 - 全平台支持
 - API调用，可参考（[internal/runner/runner.go](https://github.com/niudaii/webscan/blob/main/internal/runner/runner.go)）
-- 和 nuclei 联动
+- 和nuclei联动
 
 ## 使用
 
