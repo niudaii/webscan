@@ -22,6 +22,7 @@ type Options struct {
 	Proxy      string
 	Header     string
 	FingerFile string
+	FilterTag  string
 	// output
 	OutputFile string
 	NoColor    bool
@@ -31,6 +32,7 @@ type Options struct {
 
 	Targets     []string
 	Headers     []string
+	FilterTags  []string
 	FingerRules []*webscan.FingerRule `json:"-"`
 }
 
@@ -49,8 +51,9 @@ func ParseOptions() *Options {
 		flagSet.IntVar(&options.Threads, "threads", 10, "number of threads"),
 		flagSet.IntVar(&options.Timeout, "timeout", 15, "timeout in seconds"),
 		flagSet.StringVarP(&options.Proxy, "proxy", "p", "", "proxy(example: -p 'http://127.0.0.1:8080')"),
-		flagSet.StringVar(&options.Header, "header", "", "add custom headers(example: -header 'User-Agent: xxx, ')"),
+		flagSet.StringVar(&options.Header, "header", "", "add custom headers(example: -header 'User-Agent: xxx')"),
 		flagSet.StringVar(&options.FingerFile, "finger-file", "", "use your finger file(example: -finger-file 'fingers.json')"),
+		flagSet.StringVar(&options.FilterTag, "filter-tag", "非重要", "filter tags(example: -filter-tag '非重要')"),
 	)
 
 	flagSet.CreateGroup("output", "Output",
@@ -125,6 +128,10 @@ func (o *Options) configureOptions() error {
 
 	if o.Header != "" {
 		o.Headers = strings.Split(o.Header, ",")
+	}
+
+	if o.FilterTag != "" {
+		o.FilterTags = strings.Split(o.FilterTag, ",")
 	}
 
 	if o.Proxy == "bp" {
