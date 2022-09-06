@@ -32,13 +32,10 @@ func NewRunner(options *Options) (*Runner, error) {
 }
 
 func (r *Runner) Run() {
-	// 目标解析
 	if len(r.options.Targets) == 0 {
 		gologger.Info().Msgf("目标为空")
 		return
 	}
-	gologger.Info().Msgf("指纹数量: %v", len(r.options.FingerRules))
-	gologger.Info().Msgf("目标数量: %v", len(r.options.Targets))
 	// web扫描
 	results := r.webscanRunner.Run(r.options.Targets)
 	if len(results) == 0 {

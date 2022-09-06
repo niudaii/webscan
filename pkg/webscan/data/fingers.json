@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Shiro",
+        "pocTags": [
+            "shiro"
+        ],
+        "tags": [],
+        "desc": "RCE",
+        "fingers": [
+            {
+                "type": "or",
+                "rules": [
+                    {
+                        "method": "keyword",
+                        "location": "header",
+                        "keyword": "=deleteMe"
+                    }
+                ]
+            }
+        ],
+        "hasPoc": true
+    }
+]

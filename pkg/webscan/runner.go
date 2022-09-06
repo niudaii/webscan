@@ -29,6 +29,13 @@ func NewRunner(options *Options) (*Runner, error) {
 	if err != nil {
 		return nil, err
 	}
+	if len(options.FingerRules) == 0 {
+		options.FingerRules, err = GetDefaultFingersData()
+		if err != nil {
+			return nil, err
+		}
+	}
+	gologger.Info().Msgf("指纹数量: %v", len(options.FingerRules))
 	return &Runner{
 		options:          options,
 		reqClient:        NewReqClient(options.Proxy, options.Timeout, options.Headers),
