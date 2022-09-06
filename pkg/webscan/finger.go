@@ -41,7 +41,7 @@ func (r *Runner) getFinger(resp *req.Response) (results []*FingerRule) {
 	var flag2 bool
 	var flag3 int
 	// 多个 FingerRules
-	for _, fingerRule := range r.fingerRules {
+	for _, fingerRule := range r.options.FingerRules {
 		rules = ""
 		flag1 = false
 		// 单个 fingerRule 多个 finger

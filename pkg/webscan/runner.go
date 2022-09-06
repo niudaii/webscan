@@ -9,25 +9,30 @@ import (
 	"time"
 )
 
-type Runner struct {
-	reqClient        *req.Client
-	wappalyzerClient *wappalyzer.Wappalyze
-	threads          int
-	noColor          bool
-	fingerRules      []*FingerRule
+type Options struct {
+	Proxy       string
+	Timeout     int
+	Headers     []string
+	Threads     int
+	NoColor     bool
+	FingerRules []*FingerRule
 }
 
-func NewRunner(proxy string, timeout, threads int, headers []string, noColor bool, fingerRules []*FingerRule) (*Runner, error) {
+type Runner struct {
+	options          *Options
+	reqClient        *req.Client
+	wappalyzerClient *wappalyzer.Wappalyze
+}
+
+func NewRunner(options *Options) (*Runner, error) {
 	wappalyzerClient, err := wappalyzer.New()
 	if err != nil {
 		return nil, err
 	}
 	return &Runner{
-		reqClient:        NewReqClient(proxy, timeout, headers),
+		options:          options,
+		reqClient:        NewReqClient(options.Proxy, options.Timeout, options.Headers),
 		wappalyzerClient: wappalyzerClient,
-		threads:          threads,
-		noColor:          noColor,
-		fingerRules:      fingerRules,
 	}, nil
 }
 
@@ -56,14 +61,14 @@ func NewReqClient(proxy string, timeout int, headers []string) *req.Client {
 	return reqClient
 }
 
-func (e *Runner) Run(urls []string) (results Results) {
+func (r *Runner) Run(urls []string) (results Results) {
 	// RunTask
 	wg := &sync.WaitGroup{}
-	taskChan := make(chan string, e.threads)
-	for i := 0; i < e.threads; i++ {
+	taskChan := make(chan string, r.options.Threads)
+	for i := 0; i < r.options.Threads; i++ {
 		go func() {
 			for task := range taskChan {
-				resp, err := e.Webinfo(task)
+				resp, err := r.Webinfo(task)
 				if err != nil {
 					gologger.Debug().Msgf("%v", err)
 				} else {
@@ -71,7 +76,7 @@ func (e *Runner) Run(urls []string) (results Results) {
 					if len(resp.Fingers) > 5 {
 						gologger.Warning().Msgf("%v 可能为蜜罐", resp.Url)
 					} else {
-						gologger.Silent().Msgf(FmtResult(resp, e.noColor))
+						gologger.Silent().Msgf(FmtResult(resp, r.options.NoColor))
 						results = append(results, resp)
 					}
 				}
