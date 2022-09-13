@@ -66,13 +66,13 @@ DEBUG:
 
 ## 截图
 
-![image-20220903114959607](https://nnotes.oss-cn-hangzhou.aliyuncs.com/notes/image-20220903114959607.png)
+![image-20220913171207594](https://nnotes.oss-cn-hangzhou.aliyuncs.com/notes/image-20220913171207594.png)
 
 ## 说明
 
 ### 指纹
 
-- demo
+- 单条指纹demo
 
 ```
 {
@@ -99,6 +99,7 @@ DEBUG:
 ```
 
 - pocTags 和 nuclei 的 tags 对应
+- tags 可分类和过滤
 - 不公开内部指纹
 
 
