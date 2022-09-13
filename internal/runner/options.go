@@ -153,7 +153,7 @@ func (o *Options) configureOptions() error {
 	o.Targets = utils.RemoveDuplicate(o.Targets)
 
 	opt, _ := json.Marshal(o)
-	gologger.Debug().Msgf("当前配置: %v", string(opt))
+	gologger.Debug().Msgf("当前选项: %v", string(opt))
 
 	return nil
 }

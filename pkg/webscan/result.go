@@ -33,7 +33,7 @@ func FmtResult(result *Result, noColor bool) (res string) {
 	if noColor {
 		res = fmt.Sprintf("%v [%v] [%v] [%v] [%v] [%v] [%v]\n", result.Url, result.StatusCode, result.ContentLength, result.IconHash, result.Title, GetWappalyzerString(result.Wappalyzer), GetFingerString(result.Fingers))
 	} else {
-		res = fmt.Sprintf("%v [%v] [%v] [%v] [%v] [%v] [%v]\n", result.Url, aurora.Red(result.StatusCode), aurora.Yellow(result.ContentLength), aurora.Blue(result.IconHash), aurora.Green(result.Title), GetWappalyzerString(result.Wappalyzer), aurora.Red(GetFingerString(result.Fingers)))
+		res = fmt.Sprintf("%v [%v] [%v] [%v] [%v] [%v] [%v]\n", result.Url, aurora.Red(result.StatusCode), aurora.Yellow(result.ContentLength), aurora.Blue(result.IconHash), aurora.Green(result.Title), aurora.Cyan(GetWappalyzerString(result.Wappalyzer)), aurora.Red(GetFingerString(result.Fingers)))
 	}
 	return
 }
