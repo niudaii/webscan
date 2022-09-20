@@ -28,11 +28,7 @@
 - 获取 statusCode、contentLength、favicon、iconHash、title、wappalyzer、finger
 - title自动解码
 - js分析自动跳转
-- 支持彩色输出
-- 支持多种输出模式（debug|silent）
-- 全平台支持
 - API调用，可参考（[internal/runner/runner.go](https://github.com/niudaii/webscan/blob/main/internal/runner/runner.go)）
-- 和nuclei联动
 
 ## 使用
 
@@ -102,7 +98,9 @@ DEBUG:
 - tags 可分类和过滤
 - 不公开内部指纹
 
+## 说明
 
+已经停止更新，该项目作为 [zpscan](https://github.com/niudaii/zpscan) 的模块之一，后续更新参考 zpscan。
 
 ## 参考
 
